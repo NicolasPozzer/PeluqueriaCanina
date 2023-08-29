@@ -4,6 +4,8 @@ package com.mycompany.peluqueriacanina.gui;
 import com.mycompany.peluqueriacanina.logica.ControladoraLogica;
 import com.mycompany.peluqueriacanina.logica.Mascota;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VerDatos extends javax.swing.JFrame {
@@ -176,15 +178,56 @@ public class VerDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        //con getRowCount recibimos que hayan valores en la fila
+        if(tablaMascotas.getRowCount() > 0){
+            //Y con getselectedRow nos dice que si alguna
+            //fila esta seleccionada con el mouse
+            if(tablaMascotas.getSelectedRow() != -1){
+                //esto significa: de la tabla mascotas traeme el valor que esta en la columna 0 de la fila seleccionada.
+                int num_cliente = Integer.parseInt(String.valueOf(tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0)));
+                control.borrarMascota(num_cliente);
+                
+                //Llamo al metodo automatizado para el cartel de eliminado!
+                mostrarMensaje("Mascota eliminada correctamente!", "tuma", "Borrado de Mascota");
+                
+                //volver a cargar la tabla actualizada despues de eliminar
+                cargarTabla();
+            }
+            else{
+                mostrarMensaje("No selecciono ninguna mascota para eliminar!", "Error", "Error al Eliminar");
+            }
+        }
+        else{
+            mostrarMensaje("No hay nada para eliminar en la tabla!", "Error", "Error al Eliminar");
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    //METODO PARA AUTOMATIZAR EL MENSAJE Y AGREGAR LOS DATOS POR PARAMETRO
+    public void mostrarMensaje(String mensaje, String tipo, String titulo){//datos que recibe el metodo por parametro
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if(tipo.equals("Info")){
+                optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);//Seleccionamos el logo que querramos ej. INFORMATION_MESSAGE
+                }
+        else if(tipo.equals("Error")){
+                optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+                }
+        else{
+            optionPane.setMessageType(JOptionPane.CLOSED_OPTION);
+        }
+                JDialog dialog = optionPane.createDialog(titulo);
+                dialog.setVisible(true);
+    }
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
         cargarTabla();
         
     }//GEN-LAST:event_formWindowOpened
     
+    
+    
+                                               
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -40,6 +40,10 @@ public class ControladoraLogica {
         //metodo que retorna algo asi q si o si tiene q tener un return
         return controlPersis.traerMascotas();
     }
+
+    public void borrarMascota(int num_cliente) {
+        controlPersis.borrarMascota(num_cliente);
+    }
     
     
 }
