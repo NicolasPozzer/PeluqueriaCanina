@@ -1,9 +1,16 @@
 
 package com.mycompany.peluqueriacanina;
 
+import com.mycompany.peluqueriacanina.gui.Principal;
+
 public class PeluqueriaCanina {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        /*==Mostrar JFrame==*/
+        Principal princi = new Principal();
+        princi.setVisible(true);
+        princi.setLocationRelativeTo(null);
+        princi.setTitle("Peluqueria Canina By Niko7even");
+        /*===============*/
     }
 }
