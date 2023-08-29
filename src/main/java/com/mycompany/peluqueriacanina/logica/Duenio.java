@@ -1,8 +1,19 @@
 
 package com.mycompany.peluqueriacanina.logica;
 
-public class Duenio {
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Duenio implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)//Para que se cree automaticamente y el usuario no tenga q agregar su id
     private int id_duenio;
+    @Basic
     private String nombre;
     private String celDuenio;
 
